@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func repondWithJson(w http.ResponseWriter,code int,payload interface{}){
+func respondWithJson(w http.ResponseWriter,code int,payload interface{}){
 	data,err := json.Marshal(payload);
 	if err != nil {
 		log.Printf("Failed to Marshal json response %v",payload);
@@ -14,6 +14,6 @@ func repondWithJson(w http.ResponseWriter,code int,payload interface{}){
 		return
 	}
 	w.Header().Add("content-type","application/json")
-	w.WriteHeader(200);
+	w.WriteHeader(code);
 	w.Write(data)
 }
