@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	
 	"github.com/himanshu-holmes/rss-aggregator/internal/database"
 )
 
@@ -32,8 +33,14 @@ func (apiCfg apiConfig) handlerCreatUser(w http.ResponseWriter,r *http.Request){
 	 });
 
 	 if err != nil {
-		respondWithError(w,400,fmt.Sprintf("Could not create user :",err));
+		respondWithError(w,400,fmt.Sprintf("Could not create user : %v",err));
 		return
 	 }
 	respondWithJson(w, 200,databaseUserToUser(user))
 }
+
+
+func (apiCfg apiConfig) handlerGetUser(w http.ResponseWriter,req *http.Request, user database.User){
+	
+	 respondWithJson(w,200,databaseUserToUser(user))
+}  
